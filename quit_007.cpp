@@ -1,21 +1,19 @@
-#include <limits.h>
-
 class Solution {
 public:
     int reverse(int x) {
         
-		// long have greater size than int. Long can keep the number which overflow with int.
-        long value=0;
-        int max=INT_MAX;
-        int min=INT_MIN;
+        int value=0;
+		int temp=0;
+		int check=0;
         while(x!=0)
         {
+			temp = value;
             value = x%10 + value*10;
             x = x/10;
+			check = value/10;            
             
-            if((value > max) || (value < min))
+			if(check != temp)
             {
-                value = 0;
                 return 0;
             }
         }
