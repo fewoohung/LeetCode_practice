@@ -8,7 +8,9 @@ public:
         int i = size_a-1;
         int j = size_b-1;
         int temp = 0, size_result = 0;
-        int check = 0;
+        
+        int check_a = size_a - size_b - 1;
+        int check_b = size_b - size_a - 1;
         
         // how to create a null string.
         string result;
@@ -16,23 +18,19 @@ public:
         {
             result = a;
             size_result = i;
-            check = 1;
+            if(size_a > size_b)b.insert(b.begin(),check_a+1,'0');
         }
         else
         {
             result = b;
             size_result = j;
-            check = 2;
+            a.insert(a.begin(),check_b+1,'0');
         }
-        //result.resize(size_result,'0');
         
-        int check_a = size_a - size_b - 1;
-        int check_b = size_b - size_a - 1;
-        
-        while(i >=0 || j>=0)
+        while(size_result >=0)
         {
             
-            if(a[i] == '0' && b[j] == '0')
+            if(a[size_result] == '0' && b[size_result] == '0')
             {
                 if(temp == 1)
                 {
@@ -44,7 +42,7 @@ public:
                 }
                 temp = 0;
             }
-            if((a[i] == '1' && b[j] == '0') || (a[i] == '0' && b[j] == '1'))
+            if((a[size_result] == '1' && b[size_result] == '0') || (a[size_result] == '0' && b[size_result] == '1'))
             {
                 if(temp == 1)
                 {
@@ -57,7 +55,7 @@ public:
                     temp = 0;
                 }
             }
-            if(a[i] == '1' && b[j] == '1')
+            if(a[size_result] == '1' && b[size_result] == '1')
             {
                 if(temp == 1)
                 {
@@ -71,59 +69,7 @@ public:
                 }
             }
             size_result--;
-            i--;
-            j--;
-        }
-        
-        if(size_a != size_b)
-        {
-            if(check == 1)
-            {
-                while(check_a >= 0)
-                {
-                    if(temp == 1 && result[check_a] == '1')
-                    {
-                        result[check_a] = '0';
-                        temp = 1;
-                    }
-                    if((temp == 0 && result[check_a] == '1') || (temp == 1 && result[check_a] == '0'))
-                    {
-                        result[check_a] = '1';
-                        temp = 0;
-                    }
-                    if(temp == 0 && result[check_a] == '0')
-                    {
-                        result[check_a] = '0';
-                        temp = 0;
-                    }
-                    check_a--;
-                }
-            }
-            if(check == 2)
-            {
-                while(check_b >= 0)
-                {
-                    if(temp == 1 && result[check_b] == '1')
-                    {
-                        result[check_b] = '0';
-                        temp = 1;
-                    }
-                    if((temp == 0 && result[check_b] == '1') || (temp == 1 && result[check_b] == '0'))
-                    {
-                        result[check_b] = '1';
-                        temp = 0;
-                    }
-                    if(temp == 0 && result[check_b] == '0')
-                    {
-                        result[check_b] = '0';
-                        temp = 0;
-                    }
-                    check_b--;
-                }
-            }
-        }
-		// string result size will mismatch in first while (while(i >=0 || j>=0)) function.
-        
+        }        
         
         if(temp == 1)
         {
